@@ -7,6 +7,9 @@ import org.apache.ibatis.session.SqlSessionFactory
 import org.apache.ibatis.session.SqlSessionFactoryBuilder
 import org.apache.ibatis.transaction.jdbc.JdbcTransactionFactory
 
+/**
+ * 使用代码配置 Mybatis
+ */
 object MybatisConfig {
 
     private val ds = DruidDataSource().apply {

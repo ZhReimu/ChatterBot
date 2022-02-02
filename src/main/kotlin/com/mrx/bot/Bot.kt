@@ -17,6 +17,9 @@ class Bot(private val name: String) {
 
     private val defaultQuestion = "不知道捏".toQuestion()
 
+    /**
+     * 使用控制台进行聊天
+     */
     fun chat() {
         val br = BufferedReader(InputStreamReader(System.`in`))
         while (true) {
@@ -29,6 +32,11 @@ class Bot(private val name: String) {
         }
     }
 
+    /**
+     * 对指定的问题查找回答
+     * @param question Question 要查找的问题
+     * @return String 找到的回答
+     */
     fun respond(question: Question): String {
         if (question in questionHistory) {
             return (questionHistory findQuestionByQuestion question).getRandomAnswer()

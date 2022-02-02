@@ -9,6 +9,9 @@ import org.apache.logging.log4j.core.config.ConfigurationFactory
 import org.apache.logging.log4j.core.config.Configurator
 import kotlin.reflect.KClass
 
+/**
+ * 使用代码配置 Log4j2
+ */
 object XLog {
 
     init {
@@ -25,6 +28,6 @@ object XLog {
 
     fun getLogger(name: String): Logger = LogManager.getLogger(name)
 
-    fun getLogger(klazz: KClass<*>): Logger = LogManager.getLogger(klazz.qualifiedName)
+    fun getLogger(kClass: KClass<*>): Logger = LogManager.getLogger(kClass.qualifiedName)
 
 }

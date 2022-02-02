@@ -5,6 +5,7 @@ import java.io.BufferedReader
 import java.io.File
 import java.io.InputStreamReader
 
+@Deprecated(message = "什么 AIML 赶紧爬, 还不如 数据库 来得高性能")
 object YMLBot {
 
     class Bot private constructor(
