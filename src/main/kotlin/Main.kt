@@ -1,0 +1,14 @@
+import com.mrx.XLog
+import com.mrx.bot.Bot
+import com.mrx.bot.BotTrainer
+
+object Main {
+
+    private val logger = XLog.getLogger(this::class)
+
+    @JvmStatic
+    fun main(args: Array<String>) {
+        Bot("Test").chat()
+        //BotTrainer.trainCorpusFile("E:\\Jet Brains\\IntelliJ IDEA\\YAMLChatBot\\src\\main\\resources\\xiaohuangji.tsv")
+    }
+}
