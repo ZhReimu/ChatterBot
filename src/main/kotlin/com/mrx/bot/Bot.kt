@@ -44,7 +44,7 @@ class Bot(private val name: String) {
         val session = sf.openSession()
         val qDao = session.getMapper(QuestionMapper::class.java)
         val res = qDao.findAnswerByQuestion(question.question).also {
-            logger.error(it)
+            logger.debug(it)
         } ?: return "不知道捏"
         session.close()
         questionHistory.add(res)
