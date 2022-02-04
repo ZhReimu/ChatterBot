@@ -6,6 +6,7 @@ import com.mrx.MybatisConfig
 import com.mrx.mapper.QuestionMapper
 import com.mrx.model.Question
 import java.io.File
+import java.util.stream.Collectors
 
 object BotTrainer {
 
@@ -18,9 +19,10 @@ object BotTrainer {
      * 顺便说一下 小黄鸡 的 xiaohuangji50w_nofenci.conv 语料库属实整不动了,
      * 这个方法的时间复杂度直接报表, 处理了 38w 条 Answer 后,
      * 每 1w 条记录需要花费将近 10 分钟, 太哈人了,
-     * 总共大概有 130w 条回复
+     * 总共大概有 45w 条回复
      * @param file String 语料库所在路径
      */
+    @Deprecated("效率过低, 不再使用")
     fun trainCorpusFile(file: String) {
         var count = 0
         val br = File(file).inputStream().bufferedReader()
@@ -79,6 +81,43 @@ object BotTrainer {
             session = null
         }
         this.questions.saveData(true)
+        println("成功加载 $count 条语料")
+    }
+
+    /**
+     * 训练? 语料库, 效率比 trainCorpusFile 高
+     * @see trainCorpusFile
+     * @param file String 语料库文件
+     */
+    fun trainCorpusFile2(file: String) {
+        var count = 0
+        val lines = File(file).inputStream().bufferedReader().lines().collect(Collectors.toList())
+        var lastQuestion: Question? = null
+
+        lines.sorted().forEach { line ->
+            val question = Question().apply {
+                val t = line.split("\t")
+                question = t[0]
+                answer = arrayListOf(t[1].replace("\"", "'"))
+            }
+            count++
+            if (lastQuestion == null) {
+                lastQuestion = question
+            }
+            lastQuestion?.let {
+                if (question == it) {
+                    it.answer.addAll(question.answer)
+                } else {
+                    questions.add(it)
+                    if (count % 10000 == 0) {
+                        questions.saveData()
+                        println("已处理 $count 条数据")
+                    }
+                    lastQuestion = question
+                }
+            }
+        }
+        questions.saveData(true)
         println("成功加载 $count 条语料")
     }
 

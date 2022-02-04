@@ -9,6 +9,8 @@ object Main {
     @JvmStatic
     fun main(args: Array<String>) {
         Bot("Test").chat()
-        //BotTrainer.trainCorpusFile("E:\\Jet Brains\\IntelliJ IDEA\\YAMLChatBot\\src\\main\\resources\\xiaohuangji.tsv")
+//        BotTrainer.trainCorpusFile2(
+//            "E:\\Jet Brains\\IntelliJ IDEA\\YAMLChatBot\\src\\main\\resources\\xiaohuangji.tsv"
+//        )
     }
 }
