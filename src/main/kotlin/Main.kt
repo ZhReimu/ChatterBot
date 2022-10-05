@@ -1,6 +1,5 @@
 import com.mrx.XLog
 import com.mrx.bot.Bot
-import com.mrx.bot.BotTrainer
 
 object Main {
 
